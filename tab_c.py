@@ -77,8 +77,8 @@ class create_widgets:
 
     def p_striangle_2D(self):
         a = int(self.edit.get())
-        triangle_init = triangle(a)
-        triangle_init.get_t()
+        striangle_init=square(a)
+        striangle_init.get_tr()
 
     def p_square_2D(self):
         a = int(self.edit.get())
