@@ -106,7 +106,6 @@ class square:
         return [(0, 0), (z[-1], 0), (x, y)]
 
     def get_tr(self):
-        print(self.a)
         fig, ax = plt.subplots()
         ax.set_aspect("equal")
         dreieck = plt.Polygon(self.get_triangle(self.a, self.a, self.a))

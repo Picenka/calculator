@@ -9,7 +9,6 @@ class MainWindow_3d:
 
         self.Window_3d = Toplevel(Window_3d)
         self.Window_3d.title((self.Window_3d.title() + " 3d"))
-
         self.lbl = Label(self.Window_3d, text="Выберите с какими изображениями будите работать", font=50)
         self.lbl.grid(column=0, row=0, columnspan=2, pady=10)
         opts = {'ipadx': 10, 'ipady': 10, 'sticky': 'nswe'}

@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 
 from open_img import *
 from tab_c import *
-from triangle import *
 from square import *
 
 

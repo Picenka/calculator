@@ -2,9 +2,8 @@ from tkinter import *
 from matplotlib.patches import Circle
 
 from open_img import *
-from triangle import *
 from square import *
-from d3_visualization import *
+
 
 
 class create_widgets:
