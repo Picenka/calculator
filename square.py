@@ -1,7 +1,7 @@
-import numpy as np
 import matplotlib.pyplot as plt
 import math
 import matplotlib.patches as patches
+from matplotlib.patches import Circle
 from open_img import *
 
 class square:
@@ -12,6 +12,23 @@ class square:
         elif len(kwargs)==2:
             self.b = kwargs["b"]
             self.c = kwargs["c"]
+
+    def circle_2D(self):
+        r = self.a
+        plt.xlim(-r * 2, r * 2)
+        plt.ylim(-r * 2, r * 2)
+        plt.gca().set_aspect('equal')
+        ax = plt.gca()
+        circle = Circle((0, 0), r)
+        area_circle = 3.14 * r ** 2
+        circumference = 2 * 3.14 * r
+        self.text_area_circle = "Площядь круга = " + str(area_circle) + " Длина окружности =" + str(circumference)
+        ax.add_patch(circle)
+        self.path = 'test.png'
+        plt.savefig(self.path)
+        open_img(self.path,self.text_area_circle)
+
+
 
     def get_t(self):
         a=self.a
@@ -24,12 +41,12 @@ class square:
         self.text_area_circle="Площядь квадрата  = "+str(a*a)+" Периметр квадрата ="+str(4*a)
         self.path = 'test.png'
         plt.savefig(self.path)
-        open_img.open_img(self,self.path,self.text_area_circle)
+        open_img(self.path,self.text_area_circle)
 
     def trapezium(self):
         plt.fill_between([0, self.a], [self.b, self.c])
-        plt.xlim([-1, self.b*2]);
-        plt.ylim([-1, self.c*2]);
+        plt.xlim([-1, self.b*2])
+        plt.ylim([-1, self.c*2])
         plt.gca().set_aspect('equal')
         hd= abs(self.b - self.c)
         cd= math.sqrt(self.b*2+hd*2)
@@ -43,7 +60,7 @@ class square:
                                 "Периметр трапеции =" + str(self.a +self.b + self.c + cd)
         self.path = 'test.png'
         plt.savefig(self.path)
-        open_img.open_img(self, self.path, self.text_area_circle)
+        open_img(self.path,self.text_area_circle)
 
     def rectangle(self):
         a=self.a
@@ -57,7 +74,7 @@ class square:
         self.text_area_circle="Площядь прямоугольника  = "+str(a*b)+" Периметр прямоугольника ="+str(2*(b*a))
         self.path = 'test.png'
         plt.savefig(self.path)
-        open_img.open_img(self,self.path,self.text_area_circle)
+        open_img(self.path,self.text_area_circle)
 
     def rhomb(self):
         a=self.a
@@ -70,53 +87,54 @@ class square:
         self.text_area_circle="Площядь ромба  = "+str(a*a)+" Периметр ромба ="+str(4*a)
         self.path = 'test.png'
         plt.savefig(self.path)
-        open_img.open_img(self,self.path,self.text_area_circle)
+        open_img(self.path,self.text_area_circle)
 
 
 
 
 
-    def calc_angles(self, a, b, c):
-        # работает только если стороны близкие по размерам
-        a_arccos = (b ** 2 + c ** 2 - a ** 2) / (2. * b * c)
-        if a_arccos >= -1 and a_arccos <= 1:
-            alpha = np.arccos(a_arccos)
-        else:
-            alpha = np.arccos(a_arccos % 1)
-        b_arccos = (-b ** 2 + c ** 2 + a ** 2) / (2. * a * c)
-        if b_arccos >= -1 and b_arccos <= 1:
-            beta = np.arccos(b_arccos)
-        else:
-            beta = np.arccos(b_arccos % 1)
-        gamma = np.pi - alpha - beta
 
-        return alpha, beta, gamma
-
-    def calc_point(self, alpha, beta, c):
-        x = (c * np.tan(beta)) / (np.tan(alpha) + np.tan(beta))
-        y = x * np.tan(alpha)
-        return (x, y)
-
-    def get_triangle(self, a, b, c):
-        z = np.array([a, b, c])
-        while z[-1] != z.max():
-            z = z[[2, 0, 1]]
-        alpha, beta, _ = self.calc_angles(*z)
-        x, y = self.calc_point(alpha, beta, z[-1])
-        return [(0, 0), (z[-1], 0), (x, y)]
-
-    def get_tr(self):
-        fig, ax = plt.subplots()
-        ax.set_aspect("equal")
-        dreieck = plt.Polygon(self.get_triangle(self.a, self.a, self.a))
-        ax.add_patch(dreieck)
-        ax.relim()
-        ax.autoscale_view()
-        area_triangle = (self.a ** 2 * math.sqrt(3)) / 4
-
-        self.text_area_circle = "Площядь треугольника  = " + str(area_triangle) + " Периметр треугольника =" + str(
-            self.a * 3)
-
-        self.path = 'test.png'
-        plt.savefig(self.path)
-        open_img.open_img(self, self.path, self.text_area_circle)
+    # def calc_angles(self, a, b, c):
+    #     # работает только если стороны близкие по размерам
+    #     a_arccos = (b ** 2 + c ** 2 - a ** 2) / (2. * b * c)
+    #     if a_arccos >= -1 and a_arccos <= 1:
+    #         alpha = np.arccos(a_arccos)
+    #     else:
+    #         alpha = np.arccos(a_arccos % 1)
+    #     b_arccos = (-b ** 2 + c ** 2 + a ** 2) / (2. * a * c)
+    #     if b_arccos >= -1 and b_arccos <= 1:
+    #         beta = np.arccos(b_arccos)
+    #     else:
+    #         beta = np.arccos(b_arccos % 1)
+    #     gamma = np.pi - alpha - beta
+    #
+    #     return alpha, beta, gamma
+    #
+    # def calc_point(self, alpha, beta, c):
+    #     x = (c * np.tan(beta)) / (np.tan(alpha) + np.tan(beta))
+    #     y = x * np.tan(alpha)
+    #     return (x, y)
+    #
+    # def get_triangle(self, a, b, c):
+    #     z = np.array([a, b, c])
+    #     while z[-1] != z.max():
+    #         z = z[[2, 0, 1]]
+    #     alpha, beta, _ = self.calc_angles(*z)
+    #     x, y = self.calc_point(alpha, beta, z[-1])
+    #     return [(0, 0), (z[-1], 0), (x, y)]
+    #
+    # def get_tr(self):
+    #     fig, ax = plt.subplots()
+    #     ax.set_aspect("equal")
+    #     dreieck = plt.Polygon(self.get_triangle(self.a, self.a, self.a))
+    #     ax.add_patch(dreieck)
+    #     ax.relim()
+    #     ax.autoscale_view()
+    #     area_triangle = (self.a ** 2 * math.sqrt(3)) / 4
+    #
+    #     self.text_area_circle = "Площядь треугольника  = " + str(area_triangle) + " Периметр треугольника =" + str(
+    #         self.a * 3)
+    #
+    #     self.path = 'test.png'
+    #     plt.savefig(self.path)
+    #     open_img.open_img(self, self.path, self.text_area_circle)
